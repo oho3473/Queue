@@ -3,12 +3,36 @@
 
 void Enqueue(Queue& queue, int value)
 {
-	
+	Element* pElement = new Element{ value, nullptr };
+
+	if (queue.pFront == nullptr)
+	{
+		queue.pFront = pElement;
+		queue.pRear = pElement;
+	}
+
+	pElement->pNext = queue.pRear;
+	queue.pRear = pElement;
+	queue.count++;
 }
 
 bool Dequeue(Queue& queue)
 {
-	return false;
+	if (queue.count == 0)
+	{
+		std::cout << "QUEUE is empty!" << std::endl;
+		return false;
+	}
+
+	Element* pTemp = queue.pFront;
+	queue.pFront = queue.pFront->pNext;
+	queue.count--;
+
+	std::cout << "DEQUEUE : " << pTemp->value << std::endl;
+	delete pTemp;
+
+	return true;
+	
 }
 
 void Initialize(Queue& queue)
@@ -32,7 +56,7 @@ void ClearAll(Queue& queue)
 
 void Print(Queue& queue)
 {
-	Element* pElement = queue.pFront;
+	Element* pElement = queue.pRear;
 
 	while (pElement != nullptr)
 	{

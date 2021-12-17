@@ -34,7 +34,7 @@ void ProcessUserInput(Queue& queue)
 			}
 			case DEQUEUE:
 			{
-				Dequene(queue);
+				Dequeue(queue);
 				break;
 			}
 			case EXIT:
@@ -55,7 +55,7 @@ int main()
 {
 	Queue myQueue;
 
-	initialize();
+	Initialize(myQueue);
 	printInfo();
 	ProcessUserInput(myQueue);
 
