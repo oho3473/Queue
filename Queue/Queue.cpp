@@ -9,10 +9,12 @@ void Enqueue(Queue& queue, int value)
 	{
 		queue.pFront = pElement;
 		queue.pRear = pElement;
+		queue.count++;
+		return;
 	}
 
-	pElement->pNext = queue.pRear;
-	queue.pRear = pElement;
+	pElement->pNext = queue.pFront;
+	queue.pFront = pElement;
 	queue.count++;
 }
 
@@ -56,7 +58,7 @@ void ClearAll(Queue& queue)
 
 void Print(Queue& queue)
 {
-	Element* pElement = queue.pRear;
+	Element* pElement = queue.pFront;
 
 	while (pElement != nullptr)
 	{
