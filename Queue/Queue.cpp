@@ -5,16 +5,17 @@ void Enqueue(Queue& queue, int value)
 {
 	Element* pElement = new Element{ value, nullptr };
 
-	if (queue.pFront == nullptr)
+	if (queue.pFront == nullptr && queue.pRear == nullptr)
 	{
 		queue.pFront = pElement;
 		queue.pRear = pElement;
-		queue.count++;
-		return;
+	}
+	else 
+	{
+		queue.pRear->pNext = pElement;
+		queue.pRear = pElement;
 	}
 
-	pElement->pNext = queue.pFront;
-	queue.pFront = pElement;
 	queue.count++;
 }
 
@@ -54,6 +55,8 @@ void ClearAll(Queue& queue)
 		delete pElement;
 		pElement = pNext;
 	}
+
+	Initialize(queue);
 }
 
 void Print(Queue& queue)
